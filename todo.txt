@@ -1,0 +1,14 @@
+create snake
+automove snake
+change snake directions
+finish game when hitting the wall
+decrease life of snake
+random set food
+caching food
+create a dashboard score
+keeping up to date the dashboard
+
+//updates
+
+increase snake's velocity
+show animations eating/dying

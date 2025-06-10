@@ -1,0 +1,106 @@
+/* CSS Reset - Best Practices */
+
+/* Box sizing border-box per tutti gli elementi */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Rimuove margin e padding di default */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Impostazioni per html e body */
+html,
+body {
+    height: 100%;
+}
+
+/* Migliora la leggibilità del testo */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Rimuove stili di default per immagini e elementi media */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Rimuove stili di default per input e form */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Migliora la gestione del testo che va a capo */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* Rimuove stili di default per le liste */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Rimuove stili di default per i link */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Rimuove bordi di default per elementi focalizzabili */
+button,
+input,
+select,
+textarea {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Migliora l'accessibilità per elementi interattivi */
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
+/* Rimuove l'outline di default ma mantiene l'accessibilità */
+:focus {
+    outline: 2px solid transparent;
+}
+
+:focus-visible {
+    outline: 2px solid #007acc;
+    outline-offset: 2px;
+}
+
+/* Migliora la visualizzazione delle tabelle */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Previene overflow issues nei container */
+#root,
+#__next {
+    isolation: isolate;
+}

@@ -1,0 +1,1 @@
+**fillStyle/strokeStyle** = stato che rimane attivo, Cambia solo quando lo imposti di nuovo
