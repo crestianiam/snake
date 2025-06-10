@@ -1,0 +1,2 @@
+install eslint
+using env files for dimensions of snake, snake' segments and board
