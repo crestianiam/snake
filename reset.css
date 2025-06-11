@@ -1,106 +1,59 @@
-/* CSS Reset - Best Practices */
-
-/* Box sizing border-box per tutti gli elementi */
+/* Box sizing rules */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
-/* Rimuove margin e padding di default */
-* {
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
     margin: 0;
-    padding: 0;
 }
 
-/* Impostazioni per html e body */
-html,
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
 body {
-    height: 100%;
+    min-height: 90vh;
+    text-rendering: optimizeSpeed;
+    scroll-behavior: smooth;
+    font-size: x-small;
 }
 
-/* Migliora la leggibilità del testo */
-body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* A elements that don't have a class get tdefault styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
 }
 
-/* Rimuove stili di default per immagini e elementi media */
+/* Make images easier to work with */
 img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
+picture {
     max-width: 100%;
+    display: block;
 }
 
-/* Rimuove stili di default per input e form */
+/* Inherit fonts for inputs and buttons */
 input,
 button,
 textarea,
 select {
     font: inherit;
-}
-
-/* Migliora la gestione del testo che va a capo */
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    overflow-wrap: break-word;
-}
-
-/* Rimuove stili di default per le liste */
-ul,
-ol {
-    list-style: none;
-}
-
-/* Rimuove stili di default per i link */
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* Rimuove bordi di default per elementi focalizzabili */
-button,
-input,
-select,
-textarea {
-    background: none;
-    border: none;
-    outline: none;
-}
-
-/* Migliora l'accessibilità per elementi interattivi */
-button,
-[role="button"] {
-    cursor: pointer;
-}
-
-/* Rimuove l'outline di default ma mantiene l'accessibilità */
-:focus {
-    outline: 2px solid transparent;
-}
-
-:focus-visible {
-    outline: 2px solid #007acc;
-    outline-offset: 2px;
-}
-
-/* Migliora la visualizzazione delle tabelle */
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-/* Previene overflow issues nei container */
-#root,
-#__next {
-    isolation: isolate;
 }

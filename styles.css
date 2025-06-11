@@ -1,4 +1,18 @@
-.container {
+main {
+    margin-top: 1rem;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+}
+
+.score-container {
+    display: flex;
+    justify-content: start;
+}
+
+.canvas-container {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
