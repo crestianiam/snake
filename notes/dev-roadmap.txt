@@ -4,3 +4,4 @@ how stroke width works?
 see css and height page, now is 90vh, why 100vh has scrollbar
 if canvas removed from html exception in console?? handle ctx in all modules
 see gamespeed and currentdirection notes
+verify git local account
