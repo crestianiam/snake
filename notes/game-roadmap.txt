@@ -8,6 +8,8 @@ caching food
 create a dashboard score
 keeping up to date the dashboard
 
+check moveSnake function after it eates food and detected collisions
+
 //updates
 
 increase snake's velocity
