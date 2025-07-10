@@ -8,6 +8,7 @@ export default [
     plugins: {
       import: importPlugin  // ✅ AGGIUNGI
     },
+
     languageOptions: {
       globals: globals.browser,
       ecmaVersion: "latest",

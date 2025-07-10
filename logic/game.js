@@ -1,15 +1,14 @@
-import { drawSnake, clearCanvas, drawText } from "./drawing.js";
+import { drawSnake, clearCanvas, drawText, drawFood } from "./drawing.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH, ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
 import { gameState } from "./gameState.js";
-import { isSameCartesianPoint } from "./utility.js";
+import { getRandomAvailablePoint, isSamePoint, updateScoreDisplay } from "./utility.js";
 
-export function moveSnake(direction, snake) {
-    console.log("current head position", snake[0])
-    const currentSnake = [...gameState.snake];
+export function moveSnake(direction) {
+    const currentSnake = gameState.snake.map(segment => ({ x: segment.x, y: segment.y }));
     let newHead = null;
-    const currentHead = snake[0];
-    const secondPosition = snake.length > 1 ? { x: snake[1].x, y: snake[1].y } : null;
-    console.log("second", secondPosition)
+    const currentHead = { ...currentSnake[0] };
+    const secondPosition = currentSnake.length > 1 ? { ...currentSnake[1] } : null;
+    const lastPosition = { ...currentSnake[currentSnake.length - 1] };
 
     switch (direction) {
         //going up, decrease the y axis
@@ -31,13 +30,15 @@ export function moveSnake(direction, snake) {
         default:
             break;
     }
+
     //direction keyboard key not valid
     if (!newHead) {
-        console.error("Direction not valid!");
+        console.warn("Direction not valid!");
         return;
     };
+
     //going backwards not allowed
-    if (secondPosition && isSameCartesianPoint(newHead, secondPosition)) {
+    if (secondPosition && isSamePoint(newHead, secondPosition)) {
         console.error("Going backwards is not allowed!");
         return;
     }
@@ -55,24 +56,34 @@ export function moveSnake(direction, snake) {
         gameOver();
         return;
     }
-    //remind intercept eat food
-    //check if new snake causing any collision
-
     //movement accepted, drawing the new snake
+    let hasEaten = eatFood(newHead);
+
     let newSnake = [newHead];
-    for (let i = 0; i < snake.length - 1; i++) {
-        const segment = { x: snake[i].x, y: snake[i].y }
+    for (let i = 0; i < currentSnake.length - 1; i++) {
+        const segment = { x: currentSnake[i].x, y: currentSnake[i].y }
         newSnake.push(segment);
     }
 
-    gameState.snake = Array.from(newSnake);
+    if (hasEaten) {
+        newSnake.push(lastPosition);
+    }
 
-    //drawing newSnake
-    clearCanvas();
-    console.log("New head position x: ", newHead.x, " y: ", newHead.y);
-    console.log("----------------------")
-    drawSnake(gameState.snake);
+    //updating state
+    gameState.snake = Array.from(newSnake);
+    gameState.foodPosition = hasEaten ? getRandomAvailablePoint(newSnake) : gameState.foodPosition;
+    gameState.score = hasEaten ? ++gameState.score : gameState.score;
+    updateScoreDisplay(gameState.score);
+
+    drawCanvasAfterMovement();
 }
+
+function drawCanvasAfterMovement() {
+    clearCanvas();
+    drawSnake(gameState.snake);
+    drawFood(gameState.foodPosition);
+}
+
 export function gameOver() {
     clearCanvas();
     gameState.snake = Array.from(ORIGINAL_SNAKE);
@@ -80,4 +91,17 @@ export function gameOver() {
     gameState.isRunning = false;
     //drawSnake(ORIGINAL_SNAKE);
     drawText("GAME OVER")
+}
+
+export function collisionDetected() {
+    //remind mettere gameover ecc.
+}
+
+/**
+ * 
+ * @param {*} head 
+ * @returns {boolean}
+ */
+export function eatFood(head) {
+    return isSamePoint(head, gameState.foodPosition);
 }

@@ -4,6 +4,6 @@ export let gameState = {
     snake: [...ORIGINAL_SNAKE],
     score: STARTING_SCORE,
     isRunning: false,
-    //currentDirection: null
+    foodPosition: null,
     //gameSpeed: 200
 };
