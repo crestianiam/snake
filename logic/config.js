@@ -1,5 +1,5 @@
 export const CANVAS_WIDTH = 300;
-export const CANVAS_HEIGTH = 300;
+export const CANVAS_HEIGHT = 300;
 
 export const CLR_SNAKE_HEAD = "red";
 export const CLR_SNAKE_BODY = "green";

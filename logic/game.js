@@ -1,5 +1,5 @@
 import { drawSnake, clearCanvas, drawText } from "./drawing.js";
-import { ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
 import { gameState } from "./gameState.js";
 import { isSameCartesianPoint } from "./utility.js";
 
@@ -50,8 +50,8 @@ export function moveSnake(direction, snake) {
         return;
     };
     //collision with wall detected
-    if (newHead.x < 0 || newHead.y < 0) {
-        console.error("Collision with wall!")
+    if (newHead.x < 0 || newHead.y < 0 || newHead.x >= CANVAS_WIDTH || newHead.y >= CANVAS_HEIGHT) {
+        console.error("Collision with wall detected!")
         gameOver();
         return;
     }
