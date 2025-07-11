@@ -1,5 +1,5 @@
 import { drawSnake, clearCanvas, drawText, drawFood } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GAME_OVER, LABEL_GOING_BACKWARDS_NOT_ALLOWED, LABEL_TOTAL_SCORE, ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, isSamePoint, updateScoreDisplay } from "./utility.js";
 
@@ -33,26 +33,26 @@ export function moveSnake(direction) {
 
     //direction keyboard key not valid
     if (!newHead) {
-        console.warn("Direction not valid!");
+        console.warn(LABEL_DIRECTION_NOT_VALID);
         return;
     };
 
     //going backwards not allowed
     if (secondPosition && isSamePoint(newHead, secondPosition)) {
-        console.error("Going backwards is not allowed!");
+        console.error(LABEL_GOING_BACKWARDS_NOT_ALLOWED);
         return;
     }
 
     //collision with snake detected
     const snakeCollison = currentSnake.some((segment) => segment.x === newHead.x && segment.y === newHead.y);
     if (snakeCollison) {
-        console.error("Collision with snake detected!");
+        console.error(LABEL_COLLISION_WITH_SNAKE);
         gameOver();
         return;
     };
     //collision with wall detected
     if (newHead.x < 0 || newHead.y < 0 || newHead.x >= CANVAS_WIDTH || newHead.y >= CANVAS_HEIGHT) {
-        console.error("Collision with wall detected!")
+        console.error(LABEL_COLLISION_WITH_WALL)
         gameOver();
         return;
     }
@@ -71,7 +71,7 @@ export function moveSnake(direction) {
 
     //updating state
     gameState.snake = Array.from(newSnake);
-    gameState.foodPosition = hasEaten ? getRandomAvailablePoint(newSnake) : gameState.foodPosition;
+    gameState.food = hasEaten ? getRandomAvailablePoint(newSnake) : gameState.food;
     gameState.score = hasEaten ? ++gameState.score : gameState.score;
     updateScoreDisplay(gameState.score);
 
@@ -81,7 +81,7 @@ export function moveSnake(direction) {
 function drawCanvasAfterMovement() {
     clearCanvas();
     drawSnake(gameState.snake);
-    drawFood(gameState.foodPosition);
+    drawFood(gameState.food);
 }
 
 export function gameOver() {
@@ -90,7 +90,7 @@ export function gameOver() {
     gameState.score = STARTING_SCORE;
     gameState.isRunning = false;
     //drawSnake(ORIGINAL_SNAKE);
-    drawText("GAME OVER")
+    drawText(`${LABEL_GAME_OVER.toUpperCase()} - ${LABEL_TOTAL_SCORE.toUpperCase()}: ${gameState.score} `)
 }
 
 export function collisionDetected() {
@@ -103,5 +103,5 @@ export function collisionDetected() {
  * @returns {boolean}
  */
 export function eatFood(head) {
-    return isSamePoint(head, gameState.foodPosition);
+    return isSamePoint(head, gameState.food);
 }

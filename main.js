@@ -3,23 +3,24 @@ import { moveSnake } from "./logic/game.js";
 import { gameState } from "./logic/gameState.js";
 import { ctx } from "./logic/canvas.js";
 import { drawFood, drawSnake } from "./logic/drawing.js";
-import { STARTING_FOOD_POSITION } from "./logic/config.js";
+import { STARTING_FOOD_POSITION, STARTING_SCORE, LABEL_GAME_STARTED } from "./logic/config.js";
 
 function startGame() {
-    gameState.score = 0;
+    gameState.score = STARTING_SCORE;
     gameState.isRunning = true;
-    //create random snake
+    //todo implement randomn creation
     gameState.snake = [...gameState.snake];
-    //create random food
-    gameState.foodPosition = STARTING_FOOD_POSITION;
+    gameState.food = STARTING_FOOD_POSITION;
+
     //draw canvas elements
     drawSnake(gameState.snake);
-    drawFood(STARTING_FOOD_POSITION);
+    drawFood(gameState.food);
 
-    console.log("Game started!");
+    console.log(LABEL_GAME_STARTED);
 }
 
 document.getElementById('btn-start').addEventListener('click', startGame);
+//todo new button reset and show dashboard, not implmented the html yet
 document.getElementById('btn-reset').addEventListener('click', startGame);
 
 document.addEventListener('keydown', (event) => {
@@ -47,6 +48,7 @@ document.addEventListener('keydown', (event) => {
 if (!ctx) {
     console.error("2D context of canvas is not available");
 } else {
+    //todo actually replace with dashboard when implemented
     startGame();
 }
 

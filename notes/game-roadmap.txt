@@ -1,18 +1,14 @@
-create snake --
-automove snake --
-change snake directions --
-finish game when hitting the wall --
-decrease life of snake
-random set food
-caching food
-create a dashboard score
-keeping up to date the dashboard
-add win function when snake reaches max_length
+decrease life of snake and recreate snake
 check if snake has at least 1 block, where?
+random create snake
+random create food
+create a dashboard for starting the game, with user info score
+automove snake
 
-check moveSnake function after it eates food and detected collisions
-
-//updates
-
+//extra
+set starting difficulty of the game
 increase snake's velocity
 show animations eating/dying
+extra food
+random static enemies on the board
+random moving enemies
