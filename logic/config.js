@@ -1,15 +1,20 @@
-//remind possible env variable
+//remind fixed vars dimensions (ENV)
 //todo must be a square
-export const CANVAS_WIDTH = 300;
-export const CANVAS_HEIGHT = 300;
-export const CANVAS_TEXT_STARTING_POSITION = { x: 90, y: 150 }
-export const SQUARE_SIZE = 10;
-export const BORDER_WIDTH = 1;
+export const CANVAS_WIDTH = 500;
+export const CANVAS_HEIGHT = 500;
+//min 10 and multiple of CANVAS_WIDTH and CANVAS_HEIGHT
+export const SQUARE_SIZE = 25;
 
+//inferred vars dimensions
+export const RADIO_SQUARE_BORDER = 10;
+export const GRID_WIDTH = (CANVAS_WIDTH / SQUARE_SIZE);
+export const GRID_HEIGHT = (CANVAS_HEIGHT / SQUARE_SIZE);
+export const CANVAS_TEXT_STARTING_POSITION = { x: 90, y: 150 };//todo check
 
-//remind check
-export const CANVAS_TOTAL_X_POSITIONS = (CANVAS_WIDTH / SQUARE_SIZE) - 1;
-export const CANVAS_TOTAL_Y_POSITIONS = (CANVAS_HEIGHT / SQUARE_SIZE) - 1;
+export const BORDER_WIDTH = SQUARE_SIZE / RADIO_SQUARE_BORDER;
+
+//utility functions
+export const MAX_RANDOM_ATTEMPTS_LOOP = 100;
 
 //remind check
 export const MAX_SNAKE_LENGTH = CANVAS_WIDTH * CANVAS_HEIGHT - 1;
@@ -32,6 +37,7 @@ export const STARTING_SPEED = 200;
 export const CANVAS_TEXT_FONT = "Arial";
 export const CANVAS_TEXT_SIZE = "20px";
 export const CANVAS_TEXT_CLR = "black";
+export const CANVAS_NEW_LINE_VERTICAL_SPACE = 20;
 
 //html id
 export const HTML_CURRENT_SCORE_ID = "currentScore";
@@ -44,8 +50,6 @@ export const LABEL_DIRECTION_NOT_VALID = "Direction not valid!";
 export const LABEL_GAME_STARTED = "Game started!";
 export const LABEL_GAME_OVER = "Game over";
 export const LABEL_TOTAL_SCORE = "Total score";
-export const LABEL_SNAKE_LENGTH_NEGATIVE = "The length of the snake must be greater than zero!";
-export const LABEL_SNAKE_LENGTH_BIG = "The length of the snake exceded the space available in the board!";
 
 //css effects
 export const FLASH_SUCCESS = "success";

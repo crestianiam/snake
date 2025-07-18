@@ -1,5 +1,5 @@
 import { drawSnake, clearCanvas, drawFood, flashCanvas } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED } from "./config.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, SQUARE_SIZE } from "./config.js";
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
 import { gameOver } from "../main.js";
@@ -23,16 +23,16 @@ export function moveSnake() {
 
     switch (moveDirection) {
         case ("up"):
-            newHead = { x: firstPosition.x, y: firstPosition.y - 10 };
+            newHead = { x: firstPosition.x, y: firstPosition.y - SQUARE_SIZE };
             break;
         case ("down"):
-            newHead = { x: firstPosition.x, y: firstPosition.y + 10 };
+            newHead = { x: firstPosition.x, y: firstPosition.y + SQUARE_SIZE };
             break;
         case ("right"):
-            newHead = { x: firstPosition.x + 10, y: firstPosition.y };
+            newHead = { x: firstPosition.x + SQUARE_SIZE, y: firstPosition.y };
             break;
         case ("left"):
-            newHead = { x: firstPosition.x - 10, y: firstPosition.y };
+            newHead = { x: firstPosition.x - SQUARE_SIZE, y: firstPosition.y };
             break;
         default:
             break;

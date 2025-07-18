@@ -33,7 +33,7 @@ function startGame() {
 
     gameState.score = STARTING_SCORE;
     gameState.isRunning = true;
-    gameState.snake = createRandomSnake(1);
+    gameState.snake = createRandomSnake();
     gameState.food = getRandomAvailablePoint(gameState.snake);
     gameState.speed = STARTING_SPEED;
     gameState.currentDirection = getRandomStringDirection();

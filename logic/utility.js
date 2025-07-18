@@ -1,4 +1,4 @@
-import { CANVAS_TOTAL_X_POSITIONS, CANVAS_TOTAL_Y_POSITIONS, HTML_CURRENT_SCORE_ID, SQUARE_SIZE } from "./config.js";
+import { GRID_WIDTH, GRID_HEIGHT, HTML_CURRENT_SCORE_ID, MAX_RANDOM_ATTEMPTS_LOOP, SQUARE_SIZE } from "./config.js";
 
 /**
  * @fileoverview Game utility functions
@@ -15,21 +15,16 @@ export function getRandomIntNumberBetween(min, max, maxIncluded) {
 }
 
 export function getRandomXPoint() {
-    const min = 0;
-    const max = CANVAS_TOTAL_X_POSITIONS;
-    //random between 0 and CANVAS_TOTAL_X_POSITIONS included
-    const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
-    //example, with 29 tot position -> [0,290]
-    return randomInt * SQUARE_SIZE;
+    // 0-29
+    const columnIndex = Math.floor(Math.random() * GRID_WIDTH);
+    // 0-290
+    return columnIndex * SQUARE_SIZE;
 }
-
 export function getRandomYPoint() {
-    const min = 0;
-    const max = CANVAS_TOTAL_Y_POSITIONS;
-    //random between 0 and CANVAS_TOTAL_Y_POSITIONS included
-    const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
-    //example, with 29 tot position -> [0,290]
-    return randomInt * SQUARE_SIZE;
+    // 0-29
+    const columnIndex = Math.floor(Math.random() * GRID_HEIGHT);
+    // 0-290
+    return columnIndex * SQUARE_SIZE;
 }
 
 export function getRandomPoint() {
@@ -46,7 +41,7 @@ export function getRandomAvailablePoint(takenPoints = []) {
         return getRandomPoint();
     }
     let position = { x: null, y: null };
-    const maxAttempts = 100;
+    const maxAttempts = MAX_RANDOM_ATTEMPTS_LOOP;
     let attempts = 0;
     do {
         position = getRandomPoint();
@@ -74,13 +69,13 @@ export function getFoodCopy(food) {
 export function getRandomPointDirection() {
     const directions = [
         //up
-        { x: 0, y: -10 },
+        { x: 0, y: -SQUARE_SIZE },
         //down
-        { x: 0, y: 10 },
+        { x: 0, y: SQUARE_SIZE },
         //right
-        { x: 10, y: 0 },
+        { x: SQUARE_SIZE, y: 0 },
         //left
-        { x: -10, y: 0 },
+        { x: -SQUARE_SIZE, y: 0 },
     ]
     return directions[getRandomIntNumberBetween(1, 4, true) - 1];
 }
