@@ -17,7 +17,6 @@ function startGameLoop() {
     gameInterval = setInterval(() => {
         if (gameState.isRunning && gameState.currentDirection) {
             moveSnake();
-            console.log(gameState.currentDirection)
         }
     }, gameState.speed);
 }
