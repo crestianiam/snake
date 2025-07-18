@@ -5,6 +5,7 @@ import { ctx } from "./logic/canvas.js";
 import { drawFood, createRandomSnake, drawSnake, clearCanvas, drawText } from "./logic/drawing.js";
 import { STARTING_SCORE, LABEL_GAME_STARTED, LABEL_GAME_OVER, LABEL_TOTAL_SCORE, STARTING_SPEED } from "./logic/config.js";
 import { getRandomAvailablePoint, getRandomStringDirection, isOppositeDirection } from "./logic/utility.js";
+import { playCollisionSound } from "./logic/audio.js";
 
 let gameInterval = null;
 
@@ -47,6 +48,7 @@ function startGame() {
 }
 
 export function gameOver() {
+    playCollisionSound();
     clearCanvas();
     const finalScore = gameState.score;
     stopGameLoop();

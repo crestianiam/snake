@@ -3,6 +3,7 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLL
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
 import { gameOver } from "../main.js";
+import { playEatSound } from "./audio.js";
 
 export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;
@@ -72,6 +73,7 @@ export function moveSnake() {
     if (hasEaten) {
         newSnake.push(lastPosition);
         flashCanvas(FLASH_SUCCESS);
+        playEatSound();
     }
 
     //updating state
