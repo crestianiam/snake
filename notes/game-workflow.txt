@@ -1,0 +1,12 @@
+check order of 
+- draw snake
+- draw food
+- draw enemies
+
+init game
+- draw snake
+- draw food
+
+restore game
+- draw updated snake
+- draw food

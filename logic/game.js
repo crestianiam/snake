@@ -1,31 +1,38 @@
-import { drawSnake, clearCanvas, drawText, drawFood } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GAME_OVER, LABEL_GOING_BACKWARDS_NOT_ALLOWED, LABEL_TOTAL_SCORE, ORIGINAL_SNAKE, STARTING_SCORE } from "./config.js";
+import { drawSnake, clearCanvas, drawFood } from "./drawing.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED } from "./config.js";
 import { gameState } from "./gameState.js";
-import { getRandomAvailablePoint, isSamePoint, updateScoreDisplay } from "./utility.js";
+import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
+import { gameOver } from "../main.js";
 
-export function moveSnake(direction) {
-    const currentSnake = gameState.snake.map(segment => ({ x: segment.x, y: segment.y }));
+export function moveSnake(direction = null) {
+    if (gameState.snake === null || gameState.snake.length === 0) return;
+
+    //if none direction specified use the current one
+    const moveDirection = direction || gameState.currentDirection;
+    if (!moveDirection) return;
+
+    if (direction) {
+        gameState.currentDirection = direction;
+    }
+
+    const currentSnake = getSnakeCopy(gameState.snake);
     let newHead = null;
-    const currentHead = { ...currentSnake[0] };
+    const firstPosition = { ...currentSnake[0] };
     const secondPosition = currentSnake.length > 1 ? { ...currentSnake[1] } : null;
     const lastPosition = { ...currentSnake[currentSnake.length - 1] };
 
-    switch (direction) {
-        //going up, decrease the y axis
+    switch (moveDirection) {
         case ("up"):
-            newHead = { x: currentHead.x, y: currentHead.y - 10 };
+            newHead = { x: firstPosition.x, y: firstPosition.y - 10 };
             break;
-        //going down, increase the y axis
         case ("down"):
-            newHead = { x: currentHead.x, y: currentHead.y + 10 };
+            newHead = { x: firstPosition.x, y: firstPosition.y + 10 };
             break;
-        //going right, increase the x axis
         case ("right"):
-            newHead = { x: currentHead.x + 10, y: currentHead.y };
+            newHead = { x: firstPosition.x + 10, y: firstPosition.y };
             break;
-        //going left, decrease the x axis
         case ("left"):
-            newHead = { x: currentHead.x - 10, y: currentHead.y };
+            newHead = { x: firstPosition.x - 10, y: firstPosition.y };
             break;
         default:
             break;
@@ -39,7 +46,7 @@ export function moveSnake(direction) {
 
     //going backwards not allowed
     if (secondPosition && isSamePoint(newHead, secondPosition)) {
-        console.error(LABEL_GOING_BACKWARDS_NOT_ALLOWED);
+        console.warn(LABEL_GOING_BACKWARDS_NOT_ALLOWED);
         return;
     }
 
@@ -84,16 +91,18 @@ function drawCanvasAfterMovement() {
     drawFood(gameState.food);
 }
 
-export function gameOver() {
+function collison() {
+    if (gameState.snake.length === 1) {
+        gameOver();
+        return;
+    }
     clearCanvas();
-    gameState.snake = Array.from(ORIGINAL_SNAKE);
-    gameState.score = STARTING_SCORE;
-    gameState.isRunning = false;
-    //drawSnake(ORIGINAL_SNAKE);
-    drawText(`${LABEL_GAME_OVER.toUpperCase()} - ${LABEL_TOTAL_SCORE.toUpperCase()}: ${gameState.score} `)
+    //todo draw snake
+    //todo draw food
 }
 
-export function collisionDetected() {
+
+function collisionDetected() {
     //remind mettere gameover ecc.
 }
 
@@ -102,6 +111,6 @@ export function collisionDetected() {
  * @param {*} head 
  * @returns {boolean}
  */
-export function eatFood(head) {
+function eatFood(head) {
     return isSamePoint(head, gameState.food);
 }

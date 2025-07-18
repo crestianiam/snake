@@ -1,11 +1,10 @@
-decrease life of snake and recreate snake
 check if snake has at least 1 block, where?
-random create snake
-random create food
 create a dashboard for starting the game, with user info score
-automove snake
 
 //extra
+add graphics
+incrase speed when eating
+customize food and snake with images
 set starting difficulty of the game
 increase snake's velocity
 show animations eating/dying

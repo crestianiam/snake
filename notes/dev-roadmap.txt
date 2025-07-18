@@ -1,12 +1,15 @@
+check direction when creating snake, if createing on border not choosing that direction
+when creating randon snake reutrn the direction available
 using env files for dimensions of snake, snake' segments and board
 how stroke width works?
 see css and height page, now is 90vh, why 100vh has scrollbar
 if canvas removed from html exception in console?? handle ctx in all modules
-see gamespeed and currentdirection notes
+see speed and currentdirection notes
 add testing getRandomPosition and other utils fn
 add win function when snake reaches max_length
 check moveSnake function after it eates food and detected collisions
-
+check height width vars when icnreasing the canvas sizes
+checki vari return  null or undefeind
 uniform name position/point/coordinate
 
 remove eslint before deploy?

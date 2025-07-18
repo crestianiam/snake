@@ -5,15 +5,24 @@
  * @property {?Coordinate} food - Coordinates of the food (can be null).
  * @property {number} score - Current score.
  * @property {boolean} isRunning - Whether the game is currently running.
- * @property {number} [gameSpeed] - Game update speed (optional).
+ * @property {number} speed - Game update speed.
  */
 
 /** @type {GameState} */
 export const gameState = {
     snake: null,
     food: null,
-    score: 0,
+    score: null,
     isRunning: false,
-    //currentDirection:up-left-down-right
-    //todo gameSpeed: 200,
+    speed: null,
+    currentDirection: null
 };
+
+export function resetState() {
+    gameState.snake = null;
+    gameState.food = null;
+    gameState.score = null;
+    gameState.isRunning = false;
+    gameState.speed = null;
+    gameState.currentDirection = null;
+}
