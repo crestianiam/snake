@@ -5,7 +5,8 @@ import {
     LABEL_SNAKE_LENGTH_NEGATIVE,
     LABEL_SNAKE_LENGTH_BIG,
     CANVAS_TOTAL_X_POSITIONS,
-    CANVAS_TOTAL_Y_POSITIONS
+    CANVAS_TOTAL_Y_POSITIONS,
+    FLASH_CANVAS_CLR
 } from "./config.js";
 import { getRandomAvailablePoint, getRandomPointDirection, getRandomPoint } from "./utility.js";
 
@@ -123,4 +124,19 @@ export function drawText(messages) {
 export function drawFood(position) {
     ctx.fillStyle = CLR_FOOD;
     ctx.fillRect(position.x, position.y, FOOD_WIDTH, FOOD_HEIGHT);
+}
+
+export function flashCanvas(flash) {
+    let flashColor = FLASH_CANVAS_CLR.get("default");
+    if (FLASH_CANVAS_CLR.has(flash)) {
+        flashColor = FLASH_CANVAS_CLR.get(flash);
+    }
+
+    const canvas = document.getElementById("gameCanvas");
+    const colorClass = `canvas-flash-${flashColor}`;
+
+    canvas.classList.add("canvas-flash", colorClass);
+    setTimeout(() => {
+        canvas.classList.remove("canvas-flash", colorClass);
+    }, 200);
 }

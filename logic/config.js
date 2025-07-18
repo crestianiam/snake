@@ -46,3 +46,14 @@ export const LABEL_GAME_OVER = "Game over";
 export const LABEL_TOTAL_SCORE = "Total score";
 export const LABEL_SNAKE_LENGTH_NEGATIVE = "The length of the snake must be greater than zero!";
 export const LABEL_SNAKE_LENGTH_BIG = "The length of the snake exceded the space available in the board!";
+
+//css effects
+export const FLASH_SUCCESS = "success";
+export const FLASH_COLLISION = "collision";
+export const FLASH_DEFAULT = "default";
+
+export const FLASH_CANVAS_CLR = new Map([
+    [FLASH_SUCCESS, "greenyellow"],
+    [FLASH_COLLISION, "red"],
+    [FLASH_DEFAULT, "gray"]
+]);

@@ -1,5 +1,5 @@
-import { drawSnake, clearCanvas, drawFood } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED } from "./config.js";
+import { drawSnake, clearCanvas, drawFood, flashCanvas } from "./drawing.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED } from "./config.js";
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
 import { gameOver } from "../main.js";
@@ -52,14 +52,12 @@ export function moveSnake() {
     //collision with snake detected
     const snakeCollison = currentSnake.some((segment) => segment.x === newHead.x && segment.y === newHead.y);
     if (snakeCollison) {
-        console.error(LABEL_COLLISION_WITH_SNAKE);
-        gameOver();
+        collison(LABEL_COLLISION_WITH_SNAKE);
         return;
     };
     //collision with wall detected
     if (newHead.x < 0 || newHead.y < 0 || newHead.x >= CANVAS_WIDTH || newHead.y >= CANVAS_HEIGHT) {
-        console.error(LABEL_COLLISION_WITH_WALL)
-        gameOver();
+        collison(LABEL_COLLISION_WITH_WALL);
         return;
     }
     //movement accepted, drawing the new snake
@@ -73,6 +71,7 @@ export function moveSnake() {
 
     if (hasEaten) {
         newSnake.push(lastPosition);
+        flashCanvas(FLASH_SUCCESS);
     }
 
     //updating state
@@ -90,19 +89,12 @@ function drawCanvasAfterMovement() {
     drawFood(gameState.food);
 }
 
-function collison() {
-    if (gameState.snake.length === 1) {
-        gameOver();
-        return;
+function collison(msg) {
+    if (msg) {
+        console.error(msg)
     }
-    clearCanvas();
-    //todo draw snake
-    //todo draw food
-}
-
-
-function collisionDetected() {
-    //remind mettere gameover ecc.
+    flashCanvas(FLASH_COLLISION);
+    gameOver();
 }
 
 /**

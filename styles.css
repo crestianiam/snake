@@ -17,3 +17,29 @@ main {
     display: flex;
     justify-content: center;
 }
+
+@keyframes flash {
+    0% {
+        box-shadow: 0 0 20px 10px var(--flash-color);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 var(--flash-color);
+    }
+}
+
+.canvas-flash {
+    animation: flash 0.2s ease-out;
+}
+
+.canvas-flash-greenyellow {
+    --flash-color: greenyellow;
+}
+
+.canvas-flash-red {
+    --flash-color: red;
+}
+
+.canvas-flash-gray {
+    --flash-color: gray;
+}
