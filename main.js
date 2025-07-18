@@ -79,8 +79,10 @@ document.addEventListener('keydown', (event) => {
         default:
             break;
     }
-    if (newDirection && (gameState.snake.length === 1 || !isOppositeDirection(newDirection, gameState.currentDirection))) {
-        gameState.currentDirection = newDirection;
+    if (newDirection &&
+        //prevent going backwards 
+        (gameState.snake.length === 1 || !isOppositeDirection(newDirection, gameState.currentDirection))) {
+        gameState.nextDirection = newDirection;
     }
 });
 

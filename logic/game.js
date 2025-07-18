@@ -4,16 +4,15 @@ import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
 import { gameOver } from "../main.js";
 
-export function moveSnake(direction = null) {
+export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;
 
     //if none direction specified use the current one
-    const moveDirection = direction || gameState.currentDirection;
+    const moveDirection = gameState.nextDirection || gameState.currentDirection;
     if (!moveDirection) return;
 
-    if (direction) {
-        gameState.currentDirection = direction;
-    }
+    gameState.currentDirection = moveDirection;
+    gameState.nextDirection = null;
 
     const currentSnake = getSnakeCopy(gameState.snake);
     let newHead = null;

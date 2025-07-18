@@ -15,7 +15,8 @@ export const gameState = {
     score: null,
     isRunning: false,
     speed: null,
-    currentDirection: null
+    currentDirection: null,
+    nextDirection: null
 };
 
 export function resetState() {
@@ -25,4 +26,5 @@ export function resetState() {
     gameState.isRunning = false;
     gameState.speed = null;
     gameState.currentDirection = null;
+    gameState.nextDirection = null;
 }
