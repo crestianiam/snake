@@ -1,10 +1,11 @@
 import { drawSnake, clearCanvas, drawFood, flashCanvas } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, EXCEPTION_NO_POINTS_AVAILABLE, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, MAX_SNAKE_LENGTH, SQUARE_SIZE } from "./config.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, EXCEPTION_NO_POINTS_AVAILABLE, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, MAX_SNAKE_LENGTH, SQUARE_SIZE } from "./config.js";
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint } from "./utility.js";
 import { gameOver, victory } from "../main.js";
 import { playEatSound } from "./audio.js";
 import { updateScoreDisplay } from "./dom.js";
+import { FLASH_COLLISION, FLASH_SUCCESS } from "./styling.js";
 
 export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;

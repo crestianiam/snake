@@ -9,3 +9,4 @@ set starting difficulty of the game
 extra food
 random static enemies on the board
 random moving enemies
+add levels

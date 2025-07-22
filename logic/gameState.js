@@ -1,12 +1,5 @@
-/**
- * Represents the overall game state.
- * @typedef {Object} GameState
- * @property {?Coordinate[]} snake - Array of coordinates representing the snake (can be null).
- * @property {?Coordinate} food - Coordinates of the food (can be null).
- * @property {?number} score - Current score.
- * @property {?boolean} isRunning - Whether the game is currently running.
- * @property {?number} speed - Game update speed.
- */
+export const STARTING_SCORE = 0;
+export const STARTING_SPEED = 200;
 
 /** @type {GameState} */
 export const gameState = {

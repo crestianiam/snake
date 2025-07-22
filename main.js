@@ -1,9 +1,9 @@
 
 import { moveSnake, updateBoard } from "./logic/game.js";
-import { gameState, resetState } from "./logic/gameState.js";
+import { gameState, resetState, STARTING_SCORE, STARTING_SPEED } from "./logic/gameState.js";
 import { ctx } from "./logic/canvas.js";
-import { clearCanvas, drawText } from "./logic/drawing.js";
-import { STARTING_SCORE, LABEL_GAME_STARTED, LABEL_GAME_OVER, LABEL_TOTAL_SCORE, STARTING_SPEED, LABEL_GAME_WIN } from "./logic/config.js";
+import { clearCanvas, drawDashboard, drawText } from "./logic/drawing.js";
+import { LABEL_GAME_STARTED, LABEL_GAME_OVER, LABEL_TOTAL_SCORE, LABEL_GAME_WIN } from "./logic/config.js";
 import { getRandomAvailablePoint, getRandomStringDirection, isOppositeDirection } from "./logic/utility.js";
 import { playCollisionSound, playVictorySound } from "./logic/audio.js";
 
@@ -29,6 +29,7 @@ function stopGameLoop() {
 }
 
 function startGame() {
+    //drawDashboard();
     gameState.score = STARTING_SCORE;
     gameState.isRunning = true;
     //remind throw non handled, no need on empty board

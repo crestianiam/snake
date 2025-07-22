@@ -1,10 +1,6 @@
 import { canvas, ctx } from "./canvas.js";
-import {
-    BORDER_WIDTH, SNAKE_SEGMENT_HEIGHT, SNAKE_SEGMENT_WIDTH, CLR_SNAKE_HEAD, CLR_BORDER_SNAKE, CLR_SNAKE_BODY, CLR_FOOD,
-    FOOD_HEIGHT, FOOD_WIDTH, CANVAS_TEXT_FONT, CANVAS_TEXT_CLR, CANVAS_TEXT_SIZE, CANVAS_TEXT_STARTING_POSITION,
-    FLASH_CANVAS_CLR,
-    CANVAS_NEW_LINE_VERTICAL_SPACE
-} from "./config.js";
+import { BORDER_WIDTH, SQUARE_SIZE, CANVAS_TEXT_STARTING_POSITION, } from "./config.js";
+import { CANVAS_BG_CLR, CANVAS_BORDER_CLR, CANVAS_NEW_LINE_VERTICAL_SPACE, CANVAS_TEXT_CLR, CANVAS_TEXT_FONT, CANVAS_TEXT_SIZE, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, TITLE_CLR } from "./styling.js";
 
 export function drawSnakeSegment(x, y, isHead) {
     //head of the snake has different color
@@ -15,8 +11,8 @@ export function drawSnakeSegment(x, y, isHead) {
     }
     ctx.strokeStyle = CLR_BORDER_SNAKE;
     ctx.lineWidth = BORDER_WIDTH;
-    ctx.fillRect(x, y, SNAKE_SEGMENT_WIDTH, SNAKE_SEGMENT_HEIGHT)
-    ctx.strokeRect(x, y, SNAKE_SEGMENT_WIDTH, SNAKE_SEGMENT_HEIGHT)
+    ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE)
+    ctx.strokeRect(x, y, SQUARE_SIZE, SQUARE_SIZE)
 }
 
 export function drawSnake(snake) {
@@ -29,6 +25,7 @@ export function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+//remind use text align
 export function drawText(messages) {
     if (!messages || messages.length === 0) return;
 
@@ -44,7 +41,7 @@ export function drawText(messages) {
 
 export function drawFood(position) {
     ctx.fillStyle = CLR_FOOD;
-    ctx.fillRect(position.x, position.y, FOOD_WIDTH, FOOD_HEIGHT);
+    ctx.fillRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 export function flashCanvas(flash) {
@@ -62,27 +59,25 @@ export function flashCanvas(flash) {
     }, 200);
 }
 
-export function drawDashboard() {
-    // Pulizia canvas
+export function drawDashboard(score = 1) {
     clearCanvas();
-    let score = 1
 
-    // Sfondo dashboard (retro style: rosso scuro)
-    ctx.fillStyle = "#8B0000";
+    // background dashboard
+    ctx.fillStyle = CANVAS_BG_CLR;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    // Cornice
-    ctx.strokeStyle = "#FFD700";  // oro/giallo
+    // border dashboard
+    ctx.strokeStyle = CANVAS_BORDER_CLR;
     ctx.lineWidth = 6;
     ctx.strokeRect(10, 10, ctx.canvas.width - 20, ctx.canvas.height - 20);
 
-    // Titolo "SNAKE GAME" (font pixel-art style)
-    ctx.fillStyle = "#FFD700";
-    ctx.font = "bold 32px 'Press Start 2P', cursive"; // se vuoi un font stile pixel art (se disponibile)
+    // title game
+    ctx.fillStyle = TITLE_CLR;
+    ctx.font = "bold 32px 'Press Start 2P', cursive"; // remind se vuoi un font stile pixel art (se disponibile)
     ctx.textAlign = "center";
     ctx.fillText("SNAKE GAME", ctx.canvas.width / 2, 70);
 
-    // Punteggio attuale
+    // score
     ctx.font = "bold 24px Arial";
     ctx.fillStyle = "#FFFFFF";
     ctx.textAlign = "left";
@@ -111,5 +106,5 @@ export function drawDashboard() {
     ctx.font = "bold 24px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("START", btnX + btnWidth / 2, btnY + btnHeight / 2);
+    ctx.fillText("PLAY", btnX + btnWidth / 2, btnY + btnHeight / 2);
 }
