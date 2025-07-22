@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./canvas.js";
-import { BORDER_WIDTH, SQUARE_SIZE, CANVAS_TEXT_STARTING_POSITION, } from "./config.js";
+import { BORDER_WIDTH, SQUARE_SIZE, CANVAS_TEXT_STARTING_POSITION, } from "../utils/config.js";;
 import { CANVAS_BG_CLR, CANVAS_BORDER_CLR, CANVAS_NEW_LINE_VERTICAL_SPACE, CANVAS_TEXT_CLR, CANVAS_TEXT_FONT, CANVAS_TEXT_SIZE, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, TITLE_CLR } from "./styling.js";
 
 export function drawSnakeSegment(x, y, isHead) {

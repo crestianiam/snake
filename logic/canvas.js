@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from "./config.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../utils/config.js";;
 
 /** @type {HTMLCanvasElement} */
 export const canvas = document.getElementById("gameCanvas");

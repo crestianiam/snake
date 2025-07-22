@@ -1,4 +1,4 @@
-import { GRID_WIDTH, GRID_HEIGHT, MAX_RANDOM_ATTEMPTS_LOOP, SQUARE_SIZE, EXCEPTION_NO_POINTS_AVAILABLE } from "./config.js";
+import { GRID_WIDTH, GRID_HEIGHT, MAX_RANDOM_ATTEMPTS_LOOP, SQUARE_SIZE, EXCEPTION_NO_POINTS_AVAILABLE } from "../utils/config.js";
 
 /**
  * @fileoverview Game utility functions
