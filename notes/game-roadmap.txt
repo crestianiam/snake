@@ -6,8 +6,6 @@ add graphics
 incrase speed when eating
 customize food and snake with images
 set starting difficulty of the game
-increase snake's velocity
-show animations eating/dying
 extra food
 random static enemies on the board
 random moving enemies

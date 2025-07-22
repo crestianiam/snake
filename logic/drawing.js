@@ -5,7 +5,6 @@ import {
     FLASH_CANVAS_CLR,
     CANVAS_NEW_LINE_VERTICAL_SPACE
 } from "./config.js";
-import { getRandomAvailablePoint } from "./utility.js";
 
 export function drawSnakeSegment(x, y, isHead) {
     //head of the snake has different color
@@ -24,15 +23,6 @@ export function drawSnake(snake) {
     snake.forEach((segment, i) => {
         drawSnakeSegment(segment.x, segment.y, i === 0 ? true : false)
     })
-}
-
-/**
- * Draw a random snake inside the board
- * @param {number} length - Length of the snake
- * @returns {Array<Coordinate>|null} Snake generated
- */
-export function createRandomSnake() {
-    return [getRandomAvailablePoint([])];
 }
 
 export function clearCanvas() {
@@ -70,4 +60,56 @@ export function flashCanvas(flash) {
     setTimeout(() => {
         canvas.classList.remove("canvas-flash", colorClass);
     }, 200);
+}
+
+export function drawDashboard() {
+    // Pulizia canvas
+    clearCanvas();
+    let score = 1
+
+    // Sfondo dashboard (retro style: rosso scuro)
+    ctx.fillStyle = "#8B0000";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    // Cornice
+    ctx.strokeStyle = "#FFD700";  // oro/giallo
+    ctx.lineWidth = 6;
+    ctx.strokeRect(10, 10, ctx.canvas.width - 20, ctx.canvas.height - 20);
+
+    // Titolo "SNAKE GAME" (font pixel-art style)
+    ctx.fillStyle = "#FFD700";
+    ctx.font = "bold 32px 'Press Start 2P', cursive"; // se vuoi un font stile pixel art (se disponibile)
+    ctx.textAlign = "center";
+    ctx.fillText("SNAKE GAME", ctx.canvas.width / 2, 70);
+
+    // Punteggio attuale
+    ctx.font = "bold 24px Arial";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "left";
+    ctx.fillText("Score:", 50, 130);
+
+    ctx.fillStyle = "#FFFF00"; // giallo per il punteggio
+    ctx.fillText(score.toString(), 140, 130);
+
+    // Bottone START (rettangolo + testo)
+    const btnX = 50;
+    const btnY = 180;
+    const btnWidth = 150;
+    const btnHeight = 50;
+
+    // Sfondo bottone
+    ctx.fillStyle = "#00A2E8"; // blu brillante
+    ctx.fillRect(btnX, btnY, btnWidth, btnHeight);
+
+    // Bordo bottone
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(btnX, btnY, btnWidth, btnHeight);
+
+    // Testo bottone
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 24px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("START", btnX + btnWidth / 2, btnY + btnHeight / 2);
 }

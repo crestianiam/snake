@@ -1,4 +1,4 @@
-import { GRID_WIDTH, GRID_HEIGHT, HTML_CURRENT_SCORE_ID, MAX_RANDOM_ATTEMPTS_LOOP, SQUARE_SIZE } from "./config.js";
+import { GRID_WIDTH, GRID_HEIGHT, MAX_RANDOM_ATTEMPTS_LOOP, SQUARE_SIZE, EXCEPTION_NO_POINTS_AVAILABLE } from "./config.js";
 
 /**
  * @fileoverview Game utility functions
@@ -49,21 +49,13 @@ export function getRandomAvailablePoint(takenPoints = []) {
     } while (attempts < maxAttempts && takenPoints.some((point) => isSamePoint(point, position)))
 
     if (attempts >= maxAttempts) {
-        return null;
+        throw new Error(EXCEPTION_NO_POINTS_AVAILABLE);
     }
     return position;
 }
 
-export function updateScoreDisplay(score) {
-    document.getElementById(HTML_CURRENT_SCORE_ID).innerText = score;
-}
-
 export function getSnakeCopy(snake) {
     return snake.map(segment => ({ x: segment.x, y: segment.y }));
-}
-
-export function getFoodCopy(food) {
-    return { ...food };
 }
 
 export function getRandomPointDirection() {
@@ -79,7 +71,6 @@ export function getRandomPointDirection() {
     ]
     return directions[getRandomIntNumberBetween(1, 4, true) - 1];
 }
-
 
 export function getRandomStringDirection() {
     const directions = [

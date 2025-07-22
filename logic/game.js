@@ -1,9 +1,10 @@
 import { drawSnake, clearCanvas, drawFood, flashCanvas } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, SQUARE_SIZE } from "./config.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, EXCEPTION_NO_POINTS_AVAILABLE, FLASH_COLLISION, FLASH_SUCCESS, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, MAX_SNAKE_LENGTH, SQUARE_SIZE } from "./config.js";
 import { gameState } from "./gameState.js";
-import { getRandomAvailablePoint, getSnakeCopy, isSamePoint, updateScoreDisplay } from "./utility.js";
-import { gameOver } from "../main.js";
+import { getRandomAvailablePoint, getSnakeCopy, isSamePoint } from "./utility.js";
+import { gameOver, victory } from "../main.js";
 import { playEatSound } from "./audio.js";
+import { updateScoreDisplay } from "./dom.js";
 
 export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;
@@ -61,7 +62,8 @@ export function moveSnake() {
         collison(LABEL_COLLISION_WITH_WALL);
         return;
     }
-    //movement accepted, drawing the new snake
+
+    //movement accepted, creating the new snake
     let hasEaten = eatFood(newHead);
 
     let newSnake = [newHead];
@@ -78,14 +80,27 @@ export function moveSnake() {
 
     //updating state
     gameState.snake = Array.from(newSnake);
-    gameState.food = hasEaten ? getRandomAvailablePoint(newSnake) : gameState.food;
+    try {
+        gameState.food = hasEaten ? getRandomAvailablePoint(newSnake) : gameState.food;
+    } catch (error) {
+        if (error.message === EXCEPTION_NO_POINTS_AVAILABLE) {
+            victory();
+            return;
+        }
+    }
     gameState.score = hasEaten ? ++gameState.score : gameState.score;
     updateScoreDisplay(gameState.score);
 
-    drawCanvasAfterMovement();
+    //remind probably set victory earlier
+    if (gameState.snake.length >= MAX_SNAKE_LENGTH) {
+        victory();
+        return;
+    }
+
+    updateBoard();
 }
 
-function drawCanvasAfterMovement() {
+export function updateBoard() {
     clearCanvas();
     drawSnake(gameState.snake);
     drawFood(gameState.food);
@@ -99,11 +114,6 @@ function collison(msg) {
     gameOver();
 }
 
-/**
- * 
- * @param {*} head 
- * @returns {boolean}
- */
 function eatFood(head) {
     return isSamePoint(head, gameState.food);
 }

@@ -3,9 +3,9 @@
  * @typedef {Object} GameState
  * @property {?Coordinate[]} snake - Array of coordinates representing the snake (can be null).
  * @property {?Coordinate} food - Coordinates of the food (can be null).
- * @property {number} score - Current score.
- * @property {boolean} isRunning - Whether the game is currently running.
- * @property {number} speed - Game update speed.
+ * @property {?number} score - Current score.
+ * @property {?boolean} isRunning - Whether the game is currently running.
+ * @property {?number} speed - Game update speed.
  */
 
 /** @type {GameState} */
@@ -16,6 +16,7 @@ export const gameState = {
     isRunning: false,
     speed: null,
     currentDirection: null,
+    //used for checking correctly the opposite direction when multiple directions are pressed during the game interval
     nextDirection: null
 };
 
