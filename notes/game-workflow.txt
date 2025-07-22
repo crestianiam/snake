@@ -1,12 +1,18 @@
 check order of 
 - draw snake
 - draw food
-- draw enemies
+- draw enemies //not yet
 
-init game
-- draw snake
-- draw food
+dashboard //todo
+-
+-
 
-restore game
-- draw updated snake
-- draw food
+start game
+- create snake
+- create food
+- update board
+- start game loop
+
+end game (game over or victory)
+- stop game loop
+- show score

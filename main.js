@@ -5,7 +5,7 @@ import { ctx } from "./logic/canvas.js";
 import { clearCanvas, drawDashboard, drawText } from "./logic/drawing.js";
 import { LABEL_GAME_STARTED, LABEL_GAME_OVER, LABEL_TOTAL_SCORE, LABEL_GAME_WIN } from "./utils/config.js";
 import { getRandomAvailablePoint, getRandomStringDirection, isOppositeDirection } from "./utils/helperFunctions.js";
-import { playCollisionSound, playVictorySound } from "./logic/audio.js";
+import { playCollisionSound, playVictorySound } from "./utils/audio.js";
 
 let gameInterval = null;
 
