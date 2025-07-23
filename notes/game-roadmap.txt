@@ -3,6 +3,7 @@ check if snake has at least 1 block, where?
 create a dashboard for starting the game, with user info score
 
 //extra
+add image that changes when scoring increasing for rappresenting player strength
 add effects on vistory
 add graphics
 incrase speed when eating

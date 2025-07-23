@@ -20,10 +20,11 @@ export const PLAY_BTN_PRIMARY_CLR = "#39B54A";
 export const PLAY_BTN_SECONDARY_CLR = "white";
 
 //canvas objects
-export const CLR_SNAKE_HEAD = "black";
+export const CLR_SNAKE_HEAD = "white";
 export const CLR_SNAKE_BODY = "green";
 export const CLR_BORDER_SNAKE = "black";
-export const CLR_FOOD = "pink";
+export const CLR_BORDER_FOOD = "black";
+export const CLR_FOOD = "DarkKhaki";
 
 //canvas text variables
 export const CANVAS_TEXT_FONT = "Arial";

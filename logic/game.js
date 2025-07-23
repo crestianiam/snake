@@ -113,7 +113,7 @@ function collison(msg) {
         console.error(msg)
     }
     flashCanvas(FLASH_COLLISION);
-    victory();
+    gameOver();
 }
 
 function eatFood(head) {

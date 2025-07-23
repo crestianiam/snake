@@ -1,33 +1,59 @@
 import { canvas, ctx } from "./canvas.js";
-import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, CANVAS_BORDER_LINE_SIZE, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, } from "../utils/config.js";;
-import { CANVAS_BG_CLR, CANVAS_BORDER_CLR, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR, TITLE_CLR } from "./styling.js";
+import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, } from "../utils/config.js";;
+import { CANVAS_BG_CLR, CLR_BORDER_FOOD, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR } from "./styling.js";
 
-export function drawSnakeSegment(x, y, isHead) {
-    //head of the snake has different color
+export function drawSnakeSegment(x, y, isHead, color) {
     if (isHead) {
-        ctx.fillStyle = CLR_SNAKE_HEAD;
+        ctx.fillStyle = CLR_SNAKE_HEAD; // colore testa fisso
     } else {
-        ctx.fillStyle = CLR_SNAKE_BODY;
+        ctx.fillStyle = color || CLR_SNAKE_BODY; // colore corpo personalizzato o default
     }
+
     ctx.strokeStyle = CLR_BORDER_SNAKE;
     ctx.lineWidth = BORDER_WIDTH;
-    ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE)
-    ctx.strokeRect(x, y, SQUARE_SIZE, SQUARE_SIZE)
+    ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
+    ctx.strokeRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 export function drawSnake(snake) {
+    const totalSegments = snake.length;
+
     snake.forEach((segment, i) => {
-        drawSnakeSegment(segment.x, segment.y, i === 0 ? true : false)
-    })
+        const isHead = i === 0;
+
+        if (isHead) {
+            drawSnakeSegment(segment.x, segment.y, true);
+        } else {
+            const hue = (i * 360 / totalSegments + Math.random() * 20) % 360; // tonalità arcobaleno casuale
+            const saturation = 90 + Math.random() * 10; // saturazione alta 90-100%
+            const lightness = 70 + Math.random() * 10;  // luminosità chiara 70-80%
+
+            const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+            drawSnakeSegment(segment.x, segment.y, false, color);
+        }
+    });
 }
+
 
 export function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 export function drawFood(position) {
-    ctx.fillStyle = CLR_FOOD;
+    // genera colore HSL casuale, luminoso e saturato
+    const hue = Math.floor(Math.random() * 360);
+    const saturation = 90 + Math.random() * 10; // 90-100%
+    const lightness = 70 + Math.random() * 10;  // 70-80%
+
+    const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+    ctx.fillStyle = randomColor;
     ctx.fillRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
+
+    ctx.strokeStyle = CLR_BORDER_FOOD;
+    ctx.lineWidth = BORDER_WIDTH;
+    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 export function flashCanvas(flash) {
@@ -55,19 +81,10 @@ export function drawDashboard(score = null, win = false) {
     ctx.fillStyle = CANVAS_BG_CLR;
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-    /*   //border dashboard
-      ctx.strokeStyle = CANVAS_BORDER_CLR;
-      ctx.lineWidth = CANVAS_BORDER_LINE_SIZE;
-      ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT); */
-
-    //game title
-    ctx.fillStyle = TITLE_CLR;
-    ctx.font = "bold 32px 'Press Start 2P', cursive"; // remind se vuoi un font stile pixel art (se disponibile)
-    ctx.textAlign = "center";
-    ctx.fillText("SNAKE GAME", Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.1));
-
     //welcome msg 
     if (score === null) {
+        ctx.font = "bold 32px 'Press Start 2P', cursive"; // remind se vuoi un font stile pixel art (se disponibile)
+        ctx.textAlign = "center";
         ctx.fillStyle = SUBTITLE_CLR;
         ctx.fillText("WELCOME IN THIS AWESOME GAME", Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.2));
     }
