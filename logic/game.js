@@ -1,10 +1,9 @@
 import { drawSnake, clearCanvas, drawFood, flashCanvas } from "./drawing.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, EXCEPTION_NO_POINTS_AVAILABLE, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, MAX_SNAKE_LENGTH, SQUARE_SIZE } from "../utils/config.js";
+import { GAME_HEIGHT, GAME_WIDTH, EXCEPTION_NO_POINTS_AVAILABLE, LABEL_COLLISION_WITH_SNAKE, LABEL_COLLISION_WITH_WALL, LABEL_DIRECTION_NOT_VALID, LABEL_GOING_BACKWARDS_NOT_ALLOWED, MAX_SNAKE_LENGTH, SQUARE_SIZE } from "../utils/config.js";
 import { gameState } from "./gameState.js";
 import { getRandomAvailablePoint, getSnakeCopy, isSamePoint } from "../utils/helperFunctions.js";
 import { gameOver, victory } from "../main.js";
 import { playEatSound } from "../utils/audio.js";
-import { updateScoreDisplay } from "./dom.js";
 import { FLASH_COLLISION, FLASH_SUCCESS } from "./styling.js";
 
 export function moveSnake() {
@@ -59,7 +58,7 @@ export function moveSnake() {
         return;
     };
     //collision with wall detected
-    if (newHead.x < 0 || newHead.y < 0 || newHead.x >= CANVAS_WIDTH || newHead.y >= CANVAS_HEIGHT) {
+    if (newHead.x < 0 || newHead.y < 0 || newHead.x >= GAME_WIDTH || newHead.y >= GAME_HEIGHT) {
         collison(LABEL_COLLISION_WITH_WALL);
         return;
     }
@@ -90,11 +89,10 @@ export function moveSnake() {
         }
     }
     gameState.score = hasEaten ? ++gameState.score : gameState.score;
-    updateScoreDisplay(gameState.score);
 
     //remind probably set victory earlier
     if (gameState.snake.length >= MAX_SNAKE_LENGTH) {
-        victory();
+        gameOver();
         return;
     }
 
@@ -112,9 +110,10 @@ function collison(msg) {
         console.error(msg)
     }
     flashCanvas(FLASH_COLLISION);
-    gameOver();
+    victory();
 }
 
 function eatFood(head) {
     return isSamePoint(head, gameState.food);
 }
+

@@ -1,5 +1,4 @@
-check direction when creating snake, if createing on border not choosing that direction
-check loading assets correctly before starting
+show score on canvas during game
 how stroke width works?, check disallinamento con zoom
 add win function when snake reaches max_length or eat N foods
 check moveSnake function after it eates food and detected collisions

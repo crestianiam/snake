@@ -2,10 +2,11 @@
 import { moveSnake, updateBoard } from "./logic/game.js";
 import { gameState, resetState, STARTING_SCORE, STARTING_SPEED } from "./logic/gameState.js";
 import { ctx } from "./logic/canvas.js";
-import { clearCanvas, drawDashboard, drawText } from "./logic/drawing.js";
-import { LABEL_GAME_STARTED, LABEL_GAME_OVER, LABEL_TOTAL_SCORE, LABEL_GAME_WIN } from "./utils/config.js";
-import { getRandomAvailablePoint, getRandomStringDirection, isOppositeDirection } from "./utils/helperFunctions.js";
-import { playCollisionSound, playVictorySound } from "./utils/audio.js";
+import { clearCanvas, drawDashboard } from "./logic/drawing.js";
+import { LABEL_GAME_STARTED, LABEL_GAME_CANNOT_START } from "./utils/config.js";
+import { getRandomAvailablePoint, getRandomCentralPoint, getRandomStringDirection } from "./utils/helperFunctions.js";
+import { playBackgroundMusic, playCollisionSound, playVictorySound, stopBackgroundMusic } from "./utils/audio.js";
+import { registerEventListeners } from "./events.js";
 
 let gameInterval = null;
 
@@ -28,12 +29,11 @@ function stopGameLoop() {
     }
 }
 
-function startGame() {
-    //drawDashboard();
+export function startGame() {
     gameState.score = STARTING_SCORE;
     gameState.isRunning = true;
-    //remind throw non handled, no need on empty board
-    gameState.snake = [getRandomAvailablePoint()];
+    //remind throw of getRandomAvailablePoint non handled, no need on empty board
+    gameState.snake = [getRandomCentralPoint()];
     gameState.food = getRandomAvailablePoint(gameState.snake);
     gameState.speed = STARTING_SPEED;
     gameState.currentDirection = getRandomStringDirection();
@@ -41,66 +41,39 @@ function startGame() {
 
     updateBoard();
     startGameLoop();
+    playBackgroundMusic();
 
     console.log(LABEL_GAME_STARTED);
 }
 
 export function gameOver() {
     const finalScore = gameState.score;
+    stopBackgroundMusic();
     playCollisionSound();
-    clearCanvas();
     stopGameLoop();
     resetState();
-    drawText([LABEL_GAME_OVER.toUpperCase(), `${LABEL_TOTAL_SCORE.toUpperCase()}: ${finalScore}`]);
+    drawDashboard(finalScore, false);
 }
 
 export function victory() {
     const finalScore = gameState.score;
+    stopBackgroundMusic();
     playVictorySound();
     clearCanvas();
     stopGameLoop();
     resetState();
-    drawText([LABEL_GAME_WIN.toUpperCase(), `${LABEL_TOTAL_SCORE.toUpperCase()}: ${finalScore}`]);
+    drawDashboard(finalScore, true);
 }
 
-document.getElementById('btn-start').addEventListener('click', startGame);
-//todo new button reset and show dashboard, not implmented the html yet
-document.getElementById('btn-reset').addEventListener('click', startGame);
-
-document.addEventListener('keydown', (event) => {
-    if (!gameState.isRunning) return;
-
-    let newDirection = null;
-    switch (event.key) {
-        case 'ArrowLeft':
-            newDirection = "left";
-            break;
-        case 'ArrowRight':
-            newDirection = "right";
-            break;
-        case 'ArrowUp':
-            newDirection = "up";
-            break;
-        case 'ArrowDown':
-            newDirection = "down";
-            break;
-        default:
-            break;
+async function initialize() {
+    //todo
+    //await loadAssets();
+    if (ctx) {
+        drawDashboard();
+        registerEventListeners();
+    } else {
+        console.error(LABEL_GAME_CANNOT_START);
     }
-    if (newDirection &&
-        //prevent going backwards if snake has more than one segments
-        (gameState.snake.length === 1 || !isOppositeDirection(newDirection, gameState.currentDirection))) {
-        gameState.nextDirection = newDirection;
-    }
-    //moveSnake(newDirection)
-});
-
-//check if canvas is available
-if (!ctx) {
-    console.error("2D context of canvas is not available");
-} else {
-    //todo actually replace with dashboard when implemented
-    startGame();
 }
 
-
+initialize();

@@ -3,6 +3,7 @@ export const STARTING_SPEED = 200;
 
 /** @type {GameState} */
 export const gameState = {
+    //for showing msg in dashhoard
     snake: null,
     food: null,
     score: null,

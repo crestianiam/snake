@@ -16,9 +16,9 @@ export function getRandomIntNumberBetween(min, max, maxIncluded) {
 
 export function getRandomXPoint() {
     // 0-29
-    const columnIndex = Math.floor(Math.random() * GRID_WIDTH);
+    const rowIndex = Math.floor(Math.random() * GRID_WIDTH);
     // 0-290
-    return columnIndex * SQUARE_SIZE;
+    return rowIndex * SQUARE_SIZE;
 }
 export function getRandomYPoint() {
     // 0-29
@@ -52,6 +52,25 @@ export function getRandomAvailablePoint(takenPoints = []) {
         throw new Error(EXCEPTION_NO_POINTS_AVAILABLE);
     }
     return position;
+}
+
+export function getRandomCentralPoint() {
+    const marginX = Math.floor(GRID_WIDTH * 0.25);
+    const marginY = Math.floor(GRID_HEIGHT * 0.25);
+
+    const minGridX = marginX;
+    const maxGridX = GRID_WIDTH - marginX - 1;
+
+    const minGridY = marginY;
+    const maxGridY = GRID_HEIGHT - marginY - 1;
+
+    const gridX = getRandomIntNumberBetween(minGridX, maxGridX, true);
+    const gridY = getRandomIntNumberBetween(minGridY, maxGridY, true);
+
+    return {
+        x: gridX * SQUARE_SIZE,
+        y: gridY * SQUARE_SIZE,
+    };
 }
 
 export function getSnakeCopy(snake) {

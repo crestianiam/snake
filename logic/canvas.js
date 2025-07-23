@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../utils/config.js";;
+import { GAME_WIDTH, GAME_HEIGHT } from "../utils/config.js";;
 
 /** @type {HTMLCanvasElement} */
 export const canvas = document.getElementById("gameCanvas");
@@ -6,5 +6,5 @@ export const canvas = document.getElementById("gameCanvas");
 /** @type {CanvasRenderingContext2D} */
 export const ctx = canvas.getContext("2d");
 
-canvas.width = CANVAS_WIDTH;
-canvas.height = CANVAS_HEIGHT;
+canvas.width = GAME_WIDTH;
+canvas.height = GAME_HEIGHT;

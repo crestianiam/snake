@@ -1,6 +1,6 @@
 import { canvas, ctx } from "./canvas.js";
-import { BORDER_WIDTH, SQUARE_SIZE, CANVAS_TEXT_STARTING_POSITION, } from "../utils/config.js";;
-import { CANVAS_BG_CLR, CANVAS_BORDER_CLR, CANVAS_NEW_LINE_VERTICAL_SPACE, CANVAS_TEXT_CLR, CANVAS_TEXT_FONT, CANVAS_TEXT_SIZE, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, TITLE_CLR } from "./styling.js";
+import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, CANVAS_BORDER_LINE_SIZE, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, } from "../utils/config.js";;
+import { CANVAS_BG_CLR, CANVAS_BORDER_CLR, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR, TITLE_CLR } from "./styling.js";
 
 export function drawSnakeSegment(x, y, isHead) {
     //head of the snake has different color
@@ -25,20 +25,6 @@ export function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-//remind use text align
-export function drawText(messages) {
-    if (!messages || messages.length === 0) return;
-
-
-    for (let i = 0; i < messages.length; i++) {
-        let x = CANVAS_TEXT_STARTING_POSITION.x;
-        let y = CANVAS_TEXT_STARTING_POSITION.y + i * CANVAS_NEW_LINE_VERTICAL_SPACE;
-        ctx.fillStyle = CANVAS_TEXT_CLR;
-        ctx.font = `${CANVAS_TEXT_SIZE} ${CANVAS_TEXT_FONT}`;
-        ctx.fillText(messages[i], x, y);
-    }
-}
-
 export function drawFood(position) {
     ctx.fillStyle = CLR_FOOD;
     ctx.fillRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
@@ -58,53 +44,62 @@ export function flashCanvas(flash) {
         canvas.classList.remove("canvas-flash", colorClass);
     }, 200);
 }
-
-export function drawDashboard(score = 1) {
+/**
+ * Draw dashboard and menu of the game
+ * @param {number|null} score is null only before the first game
+ */
+export function drawDashboard(score = null, win = false) {
     clearCanvas();
 
-    // background dashboard
+    //background dashboard
     ctx.fillStyle = CANVAS_BG_CLR;
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-    // border dashboard
+    //border dashboard
     ctx.strokeStyle = CANVAS_BORDER_CLR;
-    ctx.lineWidth = 6;
-    ctx.strokeRect(10, 10, ctx.canvas.width - 20, ctx.canvas.height - 20);
+    ctx.lineWidth = CANVAS_BORDER_LINE_SIZE;
+    ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-    // title game
+    //game title
     ctx.fillStyle = TITLE_CLR;
     ctx.font = "bold 32px 'Press Start 2P', cursive"; // remind se vuoi un font stile pixel art (se disponibile)
     ctx.textAlign = "center";
-    ctx.fillText("SNAKE GAME", ctx.canvas.width / 2, 70);
+    ctx.fillText("SNAKE GAME", Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.1));
 
-    // score
-    ctx.font = "bold 24px Arial";
-    ctx.fillStyle = "#FFFFFF";
-    ctx.textAlign = "left";
-    ctx.fillText("Score:", 50, 130);
+    //welcome msg 
+    if (score === null) {
+        ctx.fillStyle = SUBTITLE_CLR;
+        ctx.fillText("WELCOME IN THIS AWESOME GAME", Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.2));
+    }
 
-    ctx.fillStyle = "#FFFF00"; // giallo per il punteggio
-    ctx.fillText(score.toString(), 140, 130);
+    //victory
+    if (score !== null && win) {
+        ctx.font = "bold 24px Arial";
+        ctx.fillStyle = SUBTITLE_CLR;
+        ctx.textAlign = "center";
+        ctx.fillText(`YOU WON: ${score}`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
+    }
 
-    // Bottone START (rettangolo + testo)
-    const btnX = 50;
-    const btnY = 180;
-    const btnWidth = 150;
-    const btnHeight = 50;
+    //score
+    if (score !== null && !win) {
+        ctx.font = "bold 24px Arial";
+        ctx.fillStyle = SUBTITLE_CLR;
+        ctx.textAlign = "center";
+        ctx.fillText(`YOUR SCORE: ${score}`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
+    }
 
-    // Sfondo bottone
-    ctx.fillStyle = "#00A2E8"; // blu brillante
-    ctx.fillRect(btnX, btnY, btnWidth, btnHeight);
+    //btn play
+    ctx.fillStyle = PLAY_BTN_PRIMARY_CLR;
+    ctx.fillRect(PLAY_BTN_X, PLAY_BTN_Y, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT);
 
-    // Bordo bottone
-    ctx.strokeStyle = "#FFFFFF";
+    ctx.strokeStyle = PLAY_BTN_SECONDARY_CLR;
     ctx.lineWidth = 3;
-    ctx.strokeRect(btnX, btnY, btnWidth, btnHeight);
+    ctx.strokeRect(PLAY_BTN_X, PLAY_BTN_Y, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT);
 
-    // Testo bottone
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "bold 24px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("PLAY", btnX + btnWidth / 2, btnY + btnHeight / 2);
+    ctx.fillText("PLAY", PLAY_BTN_X + PLAY_BTN_WIDTH / 2, PLAY_BTN_Y + PLAY_BTN_HEIGHT / 2);
 }
+

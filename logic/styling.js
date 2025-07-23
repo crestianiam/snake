@@ -1,4 +1,4 @@
-export const CLR_PALETTE = ["#39B54A", "#00A3E0", "#F15A29", "#FBB03B", "#D5006D", "white"];
+export const CLR_PALETTE = ["#39B54A", "#00A3E0", "#F15A29", "#FBB03B", "#D5006D", "white", "black"];
 
 //css effects
 export const FLASH_SUCCESS = "success";
@@ -14,7 +14,8 @@ export const FLASH_CANVAS_CLR = new Map([
 //canvas dasbhoard
 export const CANVAS_BG_CLR = "#F15A29";
 export const CANVAS_BORDER_CLR = "#00A3E0";
-export const TITLE_CLR = "white";
+export const TITLE_CLR = "black";
+export const SUBTITLE_CLR = "white";
 export const PLAY_BTN_PRIMARY_CLR = "#39B54A";
 export const PLAY_BTN_SECONDARY_CLR = "white";
 
