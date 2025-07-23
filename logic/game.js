@@ -5,6 +5,7 @@ import { getRandomAvailablePoint, getSnakeCopy, isSamePoint } from "../utils/hel
 import { gameOver, victory } from "../main.js";
 import { playEatSound } from "../utils/audio.js";
 import { FLASH_COLLISION, FLASH_SUCCESS } from "./styling.js";
+import { updateScoreDisplay } from "../events.js";
 
 export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;
@@ -72,6 +73,7 @@ export function moveSnake() {
         newSnake.push(segment);
     }
 
+    //remind update here or bottom
     if (hasEaten) {
         newSnake.push(lastPosition);
         flashCanvas(FLASH_SUCCESS);
@@ -89,6 +91,7 @@ export function moveSnake() {
         }
     }
     gameState.score = hasEaten ? ++gameState.score : gameState.score;
+    updateScoreDisplay(gameState.score);
 
     //remind probably set victory earlier
     if (gameState.snake.length >= MAX_SNAKE_LENGTH) {

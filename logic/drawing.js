@@ -55,10 +55,10 @@ export function drawDashboard(score = null, win = false) {
     ctx.fillStyle = CANVAS_BG_CLR;
     ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-    //border dashboard
-    ctx.strokeStyle = CANVAS_BORDER_CLR;
-    ctx.lineWidth = CANVAS_BORDER_LINE_SIZE;
-    ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    /*   //border dashboard
+      ctx.strokeStyle = CANVAS_BORDER_CLR;
+      ctx.lineWidth = CANVAS_BORDER_LINE_SIZE;
+      ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT); */
 
     //game title
     ctx.fillStyle = TITLE_CLR;
@@ -77,7 +77,7 @@ export function drawDashboard(score = null, win = false) {
         ctx.font = "bold 24px Arial";
         ctx.fillStyle = SUBTITLE_CLR;
         ctx.textAlign = "center";
-        ctx.fillText(`YOU WON: ${score}`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
+        ctx.fillText(`OH YES, YOU WON!`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
     }
 
     //score
@@ -85,7 +85,7 @@ export function drawDashboard(score = null, win = false) {
         ctx.font = "bold 24px Arial";
         ctx.fillStyle = SUBTITLE_CLR;
         ctx.textAlign = "center";
-        ctx.fillText(`YOUR SCORE: ${score}`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
+        ctx.fillText(`OH NO, YOU SUCK!`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
     }
 
     //btn play

@@ -5,6 +5,13 @@ import { startGame } from "./main.js";
 import { PLAY_BTN_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_X, PLAY_BTN_Y } from "./utils/config.js";
 import { isOppositeDirection } from "./utils/helperFunctions.js";
 
+//html ids
+const HTML_CURRENT_SCORE_ID = "currentScore";
+
+export function updateScoreDisplay(score) {
+    document.getElementById(HTML_CURRENT_SCORE_ID).innerText = score;
+}
+
 export function registerEventListeners() {
     document.addEventListener('keydown', (event) => {
         if (!gameState.isRunning) return;
