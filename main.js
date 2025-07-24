@@ -7,6 +7,7 @@ import { LABEL_GAME_STARTED, LABEL_GAME_CANNOT_START } from "./utils/config.js";
 import { getRandomAvailablePoint, getRandomCentralPoint, getRandomStringDirection } from "./utils/helperFunctions.js";
 import { playBackgroundMusic, playCollisionSound, playVictorySound, stopBackgroundMusic } from "./utils/audio.js";
 import { registerEventListeners } from "./events.js";
+import { userState } from "./logic/userState.js";
 
 let gameInterval = null;
 
@@ -41,14 +42,14 @@ export function startGame() {
 
     updateBoard();
     startGameLoop();
-    playBackgroundMusic();
+    playBackgroundMusic(userState.soundtrack);
 
     console.log(LABEL_GAME_STARTED);
 }
 
 export function gameOver() {
     const finalScore = gameState.score;
-    stopBackgroundMusic();
+    stopBackgroundMusic(userState.soundtrack);
     playCollisionSound();
     stopGameLoop();
     resetState();
@@ -57,7 +58,7 @@ export function gameOver() {
 
 export function victory() {
     const finalScore = gameState.score;
-    stopBackgroundMusic();
+    stopBackgroundMusic(userState.soundtrack);
     playVictorySound();
     clearCanvas();
     stopGameLoop();

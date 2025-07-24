@@ -1,13 +1,20 @@
-/* sfondo colorato con sfumatura */
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('./assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(135deg, #0f2027, #126a51, #2c5364);
     color: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: "center";
 }
 
 /* intestazione con score */
@@ -26,7 +33,13 @@ body {
 .score {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00ffcc;
+    color: #b8e112;
+}
+
+.record {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #b8e112;
 }
 
 /* centra e stilizza il canvas */

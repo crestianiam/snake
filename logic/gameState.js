@@ -1,7 +1,7 @@
 export const STARTING_SCORE = 0;
 export const STARTING_SPEED = 200;
 
-/** @type {GameState} */
+/** @type {Game} */
 export const gameState = {
     //for showing msg in dashhoard
     snake: null,
