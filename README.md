@@ -31,6 +31,31 @@ A simple and fun Snake game built with HTML5 Canvas and JavaScript.
 - Modify food appearance in `drawFood`.
 - Adjust canvas size and button position in `utils/config.js`.
 
+### Using Custom Images
+
+The game supports the use of custom images for various game elements. If you wish to replace the default graphics (such as the snake's head or the food), you can do so easily.
+
+To use your own custom images, follow these simple steps:
+
+1.  Create a folder named `local` inside the `assets` directory. The full path will be **`assets/local`**.
+
+2.  Save your custom images inside this folder, using the specific file names listed below.
+
+The game will first look for images in the `local` folder. If a file is not found, it will automatically use the default image, ensuring the application always runs smoothly.
+
+| Element | Required File Name | Example Usage |
+| :--- | :--- | :--- |
+| Welcome message | `welcome.png` | `assets/images/local/welcome.png` |
+| Snake Head (up) | `headUp.png` | `assets/images/local/headUp.png` |
+| Snake Head (down) | `headDown.png` | `assets/images/local/headDown.png` |
+| Snake Head (right) | `headRight.png` | `assets/images/local/headRight.png` |
+| Snake Head (left) | `headLeft.png` | `assets/images/local/headLeft.png` |
+| Food | `food.png` | `assets/images/local/food.png` |
+| Enemy | `enemy.png` | `assets/images/local/enemy.png` |
+| Game Over message | `gameOver.png` | `assets/images/local/gameOver.png` |
+
+**Note**: Make sure that the file names and extensions (`.png`, `.jpg`, etc.) match exactly as required. If a local image does not exist, the game will seamlessly fall back to its default counterpart.
+
 ## Notes
 
 - The snake body uses a smooth color gradient or random bright colors.
