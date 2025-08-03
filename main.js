@@ -41,7 +41,7 @@ export function startGame() {
     gameState.currentDirection = getRandomStringDirection();
     gameState.nextDirection = null;
 
-    updateBoard();
+    updateBoard(gameState.currentDirection);
     startGameLoop();
     playBackgroundMusic(userState.soundtrack);
 

@@ -11,10 +11,10 @@ export function moveSnake() {
     if (gameState.snake === null || gameState.snake.length === 0) return;
 
     //if none direction specified use the current one
-    const moveDirection = gameState.nextDirection || gameState.currentDirection;
-    if (!moveDirection) return;
+    const direction = gameState.nextDirection || gameState.currentDirection;
+    if (!direction) return;
 
-    gameState.currentDirection = moveDirection;
+    gameState.currentDirection = direction;
     gameState.nextDirection = null;
 
     const currentSnake = getSnakeCopy(gameState.snake);
@@ -23,7 +23,7 @@ export function moveSnake() {
     const secondPosition = currentSnake.length > 1 ? { ...currentSnake[1] } : null;
     const lastPosition = { ...currentSnake[currentSnake.length - 1] };
 
-    switch (moveDirection) {
+    switch (direction) {
         case ("up"):
             newHead = { x: firstPosition.x, y: firstPosition.y - SQUARE_SIZE };
             break;
@@ -99,12 +99,12 @@ export function moveSnake() {
         return;
     }
 
-    updateBoard();
+    updateBoard(direction);
 }
 
-export function updateBoard() {
+export function updateBoard(direction) {
     clearCanvas();
-    drawSnake(gameState.snake);
+    drawSnake(gameState.snake, direction);
     drawFood(gameState.food);
 }
 

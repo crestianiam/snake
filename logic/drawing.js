@@ -2,29 +2,53 @@ import { canvas, ctx } from "./canvas.js";
 import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, MUSIC_SELECTOR_TITLE_Y, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, MUSIC_SELECTOR_LABEL_OFFSET_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_CHILL_X, MUSIC_SELECTOR_HARD_X, } from "../utils/config.js";;
 import { CANVAS_BG_CLR, CLR_BORDER_FOOD, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR } from "./styling.js";
 import { userState } from "./userState.js";
-import { foodImage } from "../assets/index.js";
+import { foodImage, headUpImage, headDownImage, headRightImage, headLeftImage } from "../assets/index.js";
 
-export function drawSnakeSegment(x, y, isHead, color) {
-    if (isHead) {
-        ctx.fillStyle = CLR_SNAKE_HEAD; // colore testa fisso
-    } else {
-        ctx.fillStyle = color || CLR_SNAKE_BODY; // colore corpo personalizzato o default
-    }
-
+export function drawSnakeSegment(x, y, color) {
+    ctx.fillStyle = color || CLR_SNAKE_BODY;
     ctx.strokeStyle = CLR_BORDER_SNAKE;
     ctx.lineWidth = BORDER_WIDTH;
     ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
     ctx.strokeRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-export function drawSnake(snake) {
+export function drawHead(position, direction) {
+    /*  ctx.fillStyle = CLR_SNAKE_HEAD; 
+    ctx.strokeStyle = CLR_BORDER_SNAKE;
+    ctx.lineWidth = BORDER_WIDTH;
+    ctx.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
+    ctx.strokeRect(x, y, SQUARE_SIZE, SQUARE_SIZE);*/
+    let image;
+    switch (direction) {
+        case ("up"):
+            image = headUpImage;
+            break;
+        case ("down"):
+            image = headDownImage;
+            break;
+        case ("right"):
+            image = headRightImage;
+            break;
+        case ("left"):
+            image = headLeftImage;
+            break;
+        default:
+            break;
+    }
+    ctx.drawImage(image, position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
+    /*ctx.strokeStyle = CLR_BORDER_FOOD;
+    ctx.lineWidth = BORDER_WIDTH;
+    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);*/
+}
+
+export function drawSnake(snake, direction) {
     const totalSegments = snake.length;
 
     snake.forEach((segment, i) => {
         const isHead = i === 0;
 
         if (isHead) {
-            drawSnakeSegment(segment.x, segment.y, true);
+            drawHead({ x: segment.x, y: segment.y }, direction);
         } else {
             const hue = (i * 360 / totalSegments + Math.random() * 20) % 360; // tonalità arcobaleno casuale
             const saturation = 90 + Math.random() * 10; // saturazione alta 90-100%
@@ -32,11 +56,10 @@ export function drawSnake(snake) {
 
             const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 
-            drawSnakeSegment(segment.x, segment.y, false, color);
+            drawSnakeSegment(segment.x, segment.y, color);
         }
     });
 }
-
 
 export function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
