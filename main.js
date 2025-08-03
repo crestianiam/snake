@@ -8,6 +8,7 @@ import { getRandomAvailablePoint, getRandomCentralPoint, getRandomStringDirectio
 import { playBackgroundMusic, playCollisionSound, playVictorySound, stopBackgroundMusic } from "./utils/audio.js";
 import { registerEventListeners } from "./events.js";
 import { userState } from "./logic/userState.js";
+import { loadAssets } from "./assets/index.js";
 
 let gameInterval = null;
 
@@ -67,8 +68,7 @@ export function victory() {
 }
 
 async function initialize() {
-    //todo
-    //await loadAssets();
+    await loadAssets();
     if (ctx) {
         drawDashboard();
         registerEventListeners();
