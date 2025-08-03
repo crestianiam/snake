@@ -1,5 +1,5 @@
 add load assets music and others assets
-update record
+mantain session with record
 disable click on canas dashobard while playing
 show score on canvas during game
 create enumb for list of songs

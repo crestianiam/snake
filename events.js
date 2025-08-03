@@ -9,9 +9,13 @@ import { isOppositeDirection } from "./utils/helperFunctions.js";
 
 //html ids
 const HTML_CURRENT_SCORE_ID = "currentScore";
+const HTML_CURRENT_RECORD_ID = "record";
 
 export function updateScoreDisplay(score) {
     document.getElementById(HTML_CURRENT_SCORE_ID).innerText = score;
+}
+export function updateRecordDisplay(record) {
+    document.getElementById(HTML_CURRENT_RECORD_ID).innerText = record;
 }
 
 export function registerEventListeners() {

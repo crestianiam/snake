@@ -6,7 +6,7 @@ export const gameState = {
     //for showing msg in dashhoard
     snake: null,
     food: null,
-    score: null,
+    score: 0,
     isRunning: false,
     speed: null,
     currentDirection: null,

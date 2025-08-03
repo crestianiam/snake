@@ -30,13 +30,25 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.score {
+.currentScore {
     font-size: 1.5rem;
     font-weight: bold;
     color: #b8e112;
 }
 
 .record {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #b8e112;
+}
+
+.lifes {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #b8e112;
+}
+
+.ammo {
     font-size: 1.5rem;
     font-weight: bold;
     color: #b8e112;

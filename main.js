@@ -6,11 +6,12 @@ import { clearCanvas, drawDashboard } from "./logic/drawing.js";
 import { LABEL_GAME_STARTED, LABEL_GAME_CANNOT_START } from "./utils/config.js";
 import { getRandomAvailablePoint, getRandomCentralPoint, getRandomStringDirection } from "./utils/helperFunctions.js";
 import { playBackgroundMusic, playCollisionSound, playVictorySound, stopBackgroundMusic } from "./utils/audio.js";
-import { registerEventListeners } from "./events.js";
+import { registerEventListeners, updateRecordDisplay } from "./events.js";
 import { userState } from "./logic/userState.js";
 import { loadAssets } from "./assets/index.js";
 
 let gameInterval = null;
+let record = 0;
 
 function startGameLoop() {
     if (gameInterval) {
@@ -48,8 +49,16 @@ export function startGame() {
     console.log(LABEL_GAME_STARTED);
 }
 
+export function checkRecord(score) {
+    if (score > record) {
+        record = score;
+        updateRecordDisplay(record);
+    }
+}
+
 export function gameOver() {
     const finalScore = gameState.score;
+    checkRecord(finalScore);
     stopBackgroundMusic(userState.soundtrack);
     playCollisionSound();
     stopGameLoop();
@@ -59,6 +68,7 @@ export function gameOver() {
 
 export function victory() {
     const finalScore = gameState.score;
+    checkRecord(finalScore);
     stopBackgroundMusic(userState.soundtrack);
     playVictorySound();
     clearCanvas();
