@@ -1,3 +1,4 @@
+if not local and not default image infinite lopp error console
 add load assets music and others assets
 mantain session with record
 disable click on canas dashobard while playing

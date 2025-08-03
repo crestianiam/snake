@@ -1,3 +1,4 @@
+export const welcomeImage = new Image();
 export const enemyImage = new Image();
 export const foodImage = new Image();
 export const headUpImage = new Image();
@@ -7,6 +8,7 @@ export const headLeftImage = new Image();
 export const gameOverImage = new Image();
 
 const assetMap = {
+    welcomeImage: welcomeImage,
     enemyImage: enemyImage,
     foodImage: foodImage,
     headUpImage: headUpImage,
@@ -17,6 +19,7 @@ const assetMap = {
 };
 
 const assetPaths = {
+    welcomeImage: { default: 'assets/images/welcome.png', local: 'assets/local/welcome.png' },
     enemyImage: { default: 'assets/images/enemy.png', local: 'assets/local/enemy.png' },
     foodImage: { default: 'assets/images/food.png', local: 'assets/local/food.png' },
     headUpImage: { default: 'assets/images/headUp.png', local: 'assets/local/headUp.png' },
@@ -29,7 +32,6 @@ const assetPaths = {
 export function loadAssets() {
     return new Promise((resolve) => {
         const assetKeys = Object.keys(assetMap);
-        console.log(assetKeys)
         let assetsToLoad = assetKeys.length;
         let assetsLoaded = 0;
 
