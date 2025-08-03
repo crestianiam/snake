@@ -40,7 +40,7 @@ export function registerEventListeners() {
             (gameState.snake.length === 1 || !isOppositeDirection(newDirection, gameState.currentDirection))) {
             gameState.nextDirection = newDirection;
         }
-        //moveSnake(newDirection)
+        moveSnake(newDirection)
     });
 
     canvas.addEventListener('click', function (event) {
