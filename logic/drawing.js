@@ -2,7 +2,7 @@ import { canvas, ctx } from "./canvas.js";
 import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, MUSIC_SELECTOR_TITLE_Y, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, MUSIC_SELECTOR_LABEL_OFFSET_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_CHILL_X, MUSIC_SELECTOR_HARD_X, } from "../utils/config.js";;
 import { CANVAS_BG_CLR, CLR_BORDER_FOOD, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR } from "./styling.js";
 import { userState } from "./userState.js";
-import { foodImage, headUpImage, headDownImage, headRightImage, headLeftImage } from "../assets/index.js";
+import { foodImage, headUpImage, headDownImage, headRightImage, headLeftImage, gameOverImage } from "../assets/index.js";
 
 export function drawSnakeSegment(x, y, color) {
     ctx.fillStyle = color || CLR_SNAKE_BODY;
@@ -36,9 +36,9 @@ export function drawHead(position, direction) {
             break;
     }
     ctx.drawImage(image, position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
-    /*ctx.strokeStyle = CLR_BORDER_FOOD;
+    ctx.strokeStyle = CLR_BORDER_FOOD;
     ctx.lineWidth = BORDER_WIDTH;
-    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);*/
+    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 export function drawSnake(snake, direction) {
@@ -81,10 +81,9 @@ export function drawFood(position) {
        ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE); */
     ctx.drawImage(foodImage, position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
 
-    // Puoi ancora disegnare un bordo se vuoi
-    ctx.strokeStyle = CLR_BORDER_FOOD;
+    /*ctx.strokeStyle = CLR_BORDER_FOOD;
     ctx.lineWidth = BORDER_WIDTH;
-    //ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
+    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);*/
 }
 
 export function flashCanvas(flash) {
@@ -134,6 +133,17 @@ export function drawDashboard(score = null, win = false) {
         ctx.fillStyle = SUBTITLE_CLR;
         ctx.textAlign = "center";
         ctx.fillText(`OH NO, YOU SUCK!`, Math.round(GAME_WIDTH / 2), Math.round(GAME_HEIGHT * 0.25));
+
+        if (gameOverImage.complete) {
+            const customWidth = 100;
+            const customHeight = 100;
+
+            const x = (GAME_WIDTH - customWidth) / 1.5;
+            const y = (GAME_HEIGHT / 4) - (customHeight / 2); // Posizionala 50 pixel più in basso
+
+            // Disegna l'immagine con le nuove dimensioni
+            ctx.drawImage(gameOverImage, x, y, customWidth, customHeight);
+        }
     }
 
     drawMusicSelector();

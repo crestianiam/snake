@@ -1,3 +1,4 @@
+add load assets music and others assets
 update record
 disable click on canas dashobard while playing
 show score on canvas during game
