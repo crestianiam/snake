@@ -36,9 +36,9 @@ export function drawHead(position, direction) {
             break;
     }
     ctx.drawImage(image, position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
-    ctx.strokeStyle = CLR_BORDER_FOOD;
+    /* ctx.strokeStyle = CLR_BORDER_FOOD;
     ctx.lineWidth = BORDER_WIDTH;
-    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE);
+    ctx.strokeRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE); */
 }
 
 export function drawSnake(snake, direction) {

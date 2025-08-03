@@ -1,8 +1,10 @@
+create grid with const positions on the dashboard
 if not local and not default image infinite lopp error console
+check state variable and removing non necssary, using global maybe
+disable click on canas dashobard while playing
 add load assets music and others assets
 mantain session with record
-disable click on canas dashobard while playing
-show score on canvas during game
+check images, welcome, gamovoer ecc.
 create enumb for list of songs
 how stroke width works?, check disallinamento con zoom
 add win function when snake reaches max_length or eat N foods
