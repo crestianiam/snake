@@ -3,8 +3,8 @@ const collisionSound = new Audio("assets/sounds/collision.mp3");
 const victorySound = new Audio("assets/sounds/victory.mp3");
 
 const soundtrackRetroSound = new Audio("assets/sounds/soundtrackRetro.mp3");
-const soundtrackChillSound = new Audio("assets/sounds/soundtrackChill.mp3");
-const soundtrackHardSound = new Audio("assets/sounds/soundtrackHard.mp3");
+const soundtrackReggaeSound = new Audio("assets/sounds/soundtrackReggae.mp3");
+const soundtrackElectronic = new Audio("assets/sounds/soundtrackElectronic.mp3");
 
 export function playEatSound() {
     eatSound.currentTime = 0;
@@ -29,10 +29,10 @@ export function playBackgroundMusic(trackNumber) {
             currentSoundtrack = soundtrackRetroSound;
             break;
         case 1:
-            currentSoundtrack = soundtrackChillSound;
+            currentSoundtrack = soundtrackReggaeSound;
             break;
         case 2:
-            currentSoundtrack = soundtrackHardSound;
+            currentSoundtrack = soundtrackElectronic;
             break;
         default:
             return;
@@ -50,10 +50,10 @@ export function stopBackgroundMusic(trackNumber) {
             currentSoundtrack = soundtrackRetroSound;
             break;
         case 1:
-            currentSoundtrack = soundtrackChillSound;
+            currentSoundtrack = soundtrackReggaeSound;
             break;
         case 2:
-            currentSoundtrack = soundtrackHardSound;
+            currentSoundtrack = soundtrackElectronic;
             break;
         default:
             return;

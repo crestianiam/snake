@@ -4,7 +4,7 @@ import { moveSnake } from "./logic/game.js";
 import { gameState } from "./logic/gameState.js";
 import { userState } from "./logic/userState.js";
 import { startGame } from "./main.js";
-import { MUSIC_SELECTOR_CHILL_X, MUSIC_SELECTOR_HARD_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, PLAY_BTN_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_X, PLAY_BTN_Y } from "./utils/config.js";
+import { MUSIC_SELECTOR_REGGAE_X, MUSIC_SELECTOR_ELECTRONIC_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, PLAY_BTN_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_X, PLAY_BTN_Y } from "./utils/config.js";
 import { isOppositeDirection } from "./utils/helperFunctions.js";
 
 //html ids
@@ -78,8 +78,8 @@ canvas.addEventListener("mousedown", (e) => {
         // Check for music selector click
         const musicOptions = [
             { value: 0, x: MUSIC_SELECTOR_RETRO_X },
-            { value: 1, x: MUSIC_SELECTOR_CHILL_X },
-            { value: 2, x: MUSIC_SELECTOR_HARD_X }
+            { value: 1, x: MUSIC_SELECTOR_REGGAE_X },
+            { value: 2, x: MUSIC_SELECTOR_ELECTRONIC_X }
         ];
 
         musicOptions.forEach(option => {

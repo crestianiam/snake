@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./canvas.js";
-import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, MUSIC_SELECTOR_TITLE_Y, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, MUSIC_SELECTOR_LABEL_OFFSET_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_CHILL_X, MUSIC_SELECTOR_HARD_X, } from "../utils/config.js";;
+import { BORDER_WIDTH, SQUARE_SIZE, GAME_WIDTH, GAME_HEIGHT, PLAY_BTN_WIDTH, PLAY_BTN_HEIGHT, PLAY_BTN_X, PLAY_BTN_Y, MUSIC_SELECTOR_TITLE_Y, MUSIC_SELECTOR_SIZE, MUSIC_SELECTOR_Y, MUSIC_SELECTOR_LABEL_OFFSET_X, MUSIC_SELECTOR_RETRO_X, MUSIC_SELECTOR_REGGAE_X, MUSIC_SELECTOR_ELECTRONIC_X, } from "../utils/config.js";;
 import { CANVAS_BG_CLR, CLR_BORDER_FOOD, CLR_BORDER_SNAKE, CLR_FOOD, CLR_SNAKE_BODY, CLR_SNAKE_HEAD, FLASH_CANVAS_CLR, PLAY_BTN_PRIMARY_CLR, PLAY_BTN_SECONDARY_CLR, SUBTITLE_CLR } from "./styling.js";
 import { userState } from "./userState.js";
 import { foodImage, headUpImage, headDownImage, headRightImage, headLeftImage, gameOverImage, welcomeImage } from "../assets/index.js";
@@ -177,9 +177,9 @@ export function drawPlayButton() {
 
 export function drawMusicSelector() {
     const musicOptions = [
-        { label: "Retro", value: 0, x: MUSIC_SELECTOR_RETRO_X },
-        { label: "Chill", value: 1, x: MUSIC_SELECTOR_CHILL_X },
-        { label: "Hard", value: 2, x: MUSIC_SELECTOR_HARD_X }
+        { label: "Nintendo", value: 0, x: MUSIC_SELECTOR_RETRO_X },
+        { label: "Reggae", value: 1, x: MUSIC_SELECTOR_REGGAE_X },
+        { label: "Electronic", value: 2, x: MUSIC_SELECTOR_ELECTRONIC_X }
     ];
 
     ctx.font = "bold 18px 'Press Start 2P', cursive";
