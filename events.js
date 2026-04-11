@@ -25,15 +25,19 @@ export function registerEventListeners() {
         let newDirection = null;
         switch (event.key) {
             case 'ArrowLeft':
+            case 'a':
                 newDirection = "left";
                 break;
             case 'ArrowRight':
+            case 'd':
                 newDirection = "right";
                 break;
             case 'ArrowUp':
+            case 'w':
                 newDirection = "up";
                 break;
             case 'ArrowDown':
+            case 's':
                 newDirection = "down";
                 break;
             default:
